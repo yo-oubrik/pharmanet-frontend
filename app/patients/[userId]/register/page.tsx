@@ -5,7 +5,14 @@ import RegisterForm from "@/components/forms/RegisterForm";
 import { getPatient, getUser } from "@/lib/actions/patient.actions";
 
 const Register = async ({ params: { userId } }: SearchParamProps) => {
-  const user = await getUser(userId);
+  const user = {
+    $id: userId,
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phone: "",
+  };
   const patient = await getPatient(userId);
 
   if (patient) redirect(`/patients/${userId}/new-appointment`);

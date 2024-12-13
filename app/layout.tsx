@@ -12,11 +12,11 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: "CarePulse",
+  title: "PharmaNet",
   description:
-    "A healthcare patient management System designed to streamline patient registration, appointment scheduling, and medical records management for healthcare providers.",
+    "PharmaNet est une plateforme conçue pour vous, permettant de soumettre facilement vos ordonnances et d'obtenir des notifications sur le statut de vos commandes.",
   icons: {
-    icon: "/assets/icons/logo-icon.svg",
+    icon: "/assets/icons/logo.png",
   },
 };
 

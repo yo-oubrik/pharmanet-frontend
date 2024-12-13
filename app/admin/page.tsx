@@ -2,59 +2,66 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { StatCard } from "@/components/StatCard";
-import { columns } from "@/components/table/columns";
-import { DataTable } from "@/components/table/DataTable";
-import { getRecentAppointmentList } from "@/lib/actions/appointment.actions";
+import { Button } from "@/components/ui/button";
 
 const AdminPage = async () => {
-  const appointments = await getRecentAppointmentList();
-
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
       <header className="admin-header">
         <Link href="/" className="cursor-pointer">
-          <Image
-            src="/assets/icons/logo-full.svg"
-            height={32}
-            width={162}
-            alt="logo"
-            className="h-8 w-fit"
-          />
+          <div className="flex items-center space-x-2">
+            <Image
+              src="/assets/icons/logo.png"
+              height={70}
+              width={70}
+              alt="logo"
+            />
+            <h2 className="font-bold">PharmaNet</h2>
+          </div>
         </Link>
-
-        <p className="text-16-semibold">Admin Dashboard</p>
       </header>
 
       <main className="admin-main">
         <section className="w-full space-y-4">
-          <h1 className="header">Welcome 👋</h1>
-          <p className="text-dark-700">
-            Start the day with managing new appointments
-          </p>
+          <h1 className="header">Tableau de bord</h1>
         </section>
 
         <section className="admin-stat">
           <StatCard
-            type="appointments"
-            count={appointments.scheduledCount}
-            label="Scheduled appointments"
-            icon={"/assets/icons/appointments.svg"}
+            type="utilisateurs"
+            count={0}
+            label="Total patients"
+            icon={"/assets/icons/patient.png"}
           />
           <StatCard
-            type="pending"
-            count={appointments.pendingCount}
-            label="Pending appointments"
-            icon={"/assets/icons/pending.svg"}
+            type="utilisateurs"
+            count={0}
+            label="Total pharmaciens"
+            icon={"/assets/icons/pharmacist.png"}
           />
           <StatCard
-            type="cancelled"
-            count={appointments.cancelledCount}
-            label="Cancelled appointments"
-            icon={"/assets/icons/cancelled.svg"}
+            type="pharmacies"
+            count={0}
+            label="Total pharmacies"
+            icon={"/assets/icons/pharmacy.png"}
           />
         </section>
-
-        <DataTable columns={columns} data={appointments.documents} />
+        <section className="admin-buttons flex gap-4">
+          <Button
+            variant="outline"
+            className="shad-primary-btn hover:opacity-85 transition"
+            asChild
+          >
+            <Link href={"/admin/users"}> Gérer les utilisateurs</Link>
+          </Button>
+          <Button
+            variant="outline"
+            className="shad-primary-btn hover:opacity-85 transition"
+            asChild
+          >
+            <Link href={"/admin/pharmacies"}> Gérer les les pharmacies</Link>
+          </Button>
+        </section>
       </main>
     </div>
   );
