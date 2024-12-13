@@ -24,7 +24,10 @@ const AdminPharmacies = async () => {
         <section className="w-full space-y-4">
           <h1 className="header">Gestion de pharmacies</h1>
         </section>
-        <DataTable columns={pharmaciesColumns} data={pharmacies} />
+        <DataTable
+          columns={pharmaciesColumns}
+          data={[...Array(10)].flatMap(() => pharmacies)}
+        />
       </main>
     </div>
   );

@@ -2,6 +2,7 @@
 
 import { Pharmacie, PharmacieStatus } from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
+import { useRouter } from "next/navigation";
 import {
   FaCheckCircle,
   FaTimesCircle,
@@ -53,13 +54,20 @@ export const pharmaciesColumns: ColumnDef<Pharmacie>[] = [
     ),
   },
   {
-    id: "actions",
-    header: () => <div className="pl-4">Actions</div>,
-    cell: () => {
+    header: "Actions",
+    cell: ({ row }) => {
+      const router = useRouter();
+      const id = row.original.id;
       return (
-        <div className="flex gap-5 justify-center">
+        <div className="flex gap-7">
           <FaEdit className="text-blue-500 cursor-pointer" title="Modifier" />
-          <FaEye className="text-gray-500 cursor-pointer" title="Inspecter" />
+          <FaEye
+            className="text-gray-500 cursor-pointer"
+            title="Inspecter"
+            onClick={() => {
+              router.push(`/admin/pharmacies/${id}`);
+            }}
+          />
           <FaTrash className="text-red-500 cursor-pointer" title="Supprimer" />
         </div>
       );

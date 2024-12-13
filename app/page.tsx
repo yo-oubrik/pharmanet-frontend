@@ -1,9 +1,8 @@
-import Image from "next/image";
-import Link from "next/link";
-
 import { PatientForm } from "@/components/forms/PatientForm";
 import { PasskeyModal } from "@/components/PasskeyModal";
-
+import "leaflet/dist/leaflet.css";
+import Image from "next/image";
+import Link from "next/link";
 const Home = ({ searchParams }: SearchParamProps) => {
   const isAdmin = searchParams?.admin === "true";
 
@@ -20,7 +19,6 @@ const Home = ({ searchParams }: SearchParamProps) => {
             alt="patient"
             className="mb-12"
           />
-
           <PatientForm />
 
           <div className="text-14-regular mt-20 flex justify-between">

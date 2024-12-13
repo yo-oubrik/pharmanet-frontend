@@ -3,7 +3,7 @@ export enum PharmacieStatus {
   Inactive = "Inactive",
 }
 export type Pharmacie = {
-  id?: number;
+  id: number;
   nom: string;
   adresse: string;
   status: PharmacieStatus;
