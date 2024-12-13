@@ -1,5 +1,5 @@
 import { DataTable } from "@/components/table/DataTable";
-import { utilisateurs } from "@/utils/temp/api/utilisateurs/utilisateurs";
+import { utilisateurs } from "@/app/api/utilisateurs/utilisateurs";
 import Image from "next/image";
 import Link from "next/link";
 import { userColumns } from "./usersColumns";
@@ -22,7 +22,7 @@ const AdminPharmacies = async () => {
 
       <main className="admin-main">
         <section className="w-full space-y-4">
-          <h1 className="header">Gestion de pharmacies</h1>
+          <h1 className="header">Gestion des utilisateurs</h1>
         </section>
         <DataTable columns={userColumns} data={utilisateurs} />
       </main>

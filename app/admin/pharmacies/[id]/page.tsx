@@ -1,7 +1,7 @@
 "use client";
 import "leaflet/dist/leaflet.css";
 import { Pharmacie } from "@/types/types";
-import { pharmacies } from "@/utils/temp/api/pharmacies/pharmacies";
+import { pharmacies } from "@/app/api/pharmacies/pharmacies";
 import { TileLayer, Marker, Popup, MapContainer } from "react-leaflet";
 
 const PharmaciePage = ({ params }) => {
@@ -14,19 +14,12 @@ const PharmaciePage = ({ params }) => {
   }
 
   return (
-    <div className="flex justify-between">
-      <div>
-        <h1>{pharmacie.nom}</h1>
-        <p>Adresse : {pharmacie.adresse}</p>
-        <p>Status : {pharmacie.status}</p>
-        <p>Latitude : {pharmacie.latitude.toFixed(4)}</p>
-        <p>Longitude : {pharmacie.longitude.toFixed(4)}</p>
-      </div>
+    <div className="h-screen max-h-screen">
       <MapContainer
         center={[pharmacie.latitude, pharmacie.longitude]}
         zoom={13}
         scrollWheelZoom={false}
-        style={{ height: "400px", width: "500px" }}
+        style={{ height: "100%", width: "100%" }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

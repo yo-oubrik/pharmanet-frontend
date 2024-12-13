@@ -9,6 +9,8 @@ import {
   FaEdit,
   FaEye,
   FaTrash,
+  FaMap,
+  FaLocationArrow,
 } from "react-icons/fa";
 
 export const pharmaciesColumns: ColumnDef<Pharmacie>[] = [
@@ -61,9 +63,9 @@ export const pharmaciesColumns: ColumnDef<Pharmacie>[] = [
       return (
         <div className="flex gap-7">
           <FaEdit className="text-blue-500 cursor-pointer" title="Modifier" />
-          <FaEye
+          <FaLocationArrow
             className="text-gray-500 cursor-pointer"
-            title="Inspecter"
+            title="Localiser"
             onClick={() => {
               router.push(`/admin/pharmacies/${id}`);
             }}
