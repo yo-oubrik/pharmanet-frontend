@@ -8,8 +8,6 @@ import {
   FaEye,
   FaHeartbeat,
   FaTrash,
-  FaUser,
-  FaUsers,
   FaUserShield,
   FaUserTag,
 } from "react-icons/fa";

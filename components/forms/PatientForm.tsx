@@ -12,7 +12,7 @@ import { UserFormValidation } from "@/lib/validation";
 
 import "react-phone-number-input/style.css";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
-import SubmitButton from "../SubmitButton";
+import { Button } from "../ui/button";
 
 export const PatientForm = () => {
   const router = useRouter();
@@ -58,16 +58,27 @@ export const PatientForm = () => {
             Identifiez-vous pour soumettre vos ordonnances.
           </p>
         </section>
+        <div className="flex gap-4">
+          <CustomFormField
+            fieldType={FormFieldType.INPUT}
+            control={form.control}
+            name="nom"
+            label="Nom"
+            placeholder="Dupont"
+            iconSrc="/assets/icons/user.svg"
+            iconAlt="user"
+          />
 
-        <CustomFormField
-          fieldType={FormFieldType.INPUT}
-          control={form.control}
-          name="name"
-          label="Nom complet"
-          placeholder="Jean Dupont"
-          iconSrc="/assets/icons/user.svg"
-          iconAlt="user"
-        />
+          <CustomFormField
+            fieldType={FormFieldType.INPUT}
+            control={form.control}
+            name="prenom"
+            label="Prénom"
+            placeholder="Jean"
+            iconSrc="/assets/icons/user.svg"
+            iconAlt="user"
+          />
+        </div>
 
         <CustomFormField
           fieldType={FormFieldType.INPUT}
@@ -80,6 +91,16 @@ export const PatientForm = () => {
         />
 
         <CustomFormField
+          fieldType={FormFieldType.INPUT}
+          control={form.control}
+          name="motDePasse"
+          label="Mot de passe"
+          placeholder="********"
+          iconSrc="/assets/icons/email.svg"
+          iconAlt="password"
+        />
+
+        <CustomFormField
           fieldType={FormFieldType.PHONE_INPUT}
           control={form.control}
           name="phone"
@@ -87,7 +108,12 @@ export const PatientForm = () => {
           placeholder="(555) 123-4567"
         />
 
-        <SubmitButton isLoading={isLoading}>Commencer</SubmitButton>
+        <Button className="shad-primary-btn w-full" variant={"default"}>
+          Créer un compte
+        </Button>
+        <Button className="w-full" variant={"secondary"}>
+          J'ai déja un compte
+        </Button>
       </form>
     </Form>
   );

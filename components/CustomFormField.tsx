@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+"use client";
 import { E164Number } from "libphonenumber-js/core";
 import Image from "next/image";
 import ReactDatePicker from "react-datepicker";
@@ -25,6 +25,7 @@ export enum FormFieldType {
   DATE_PICKER = "datePicker",
   SELECT = "select",
   SKELETON = "skeleton",
+  PASSWORD = "password",
 }
 
 interface CustomProps {
@@ -145,6 +146,8 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
       );
     case FormFieldType.SKELETON:
       return props.renderSkeleton ? props.renderSkeleton(field) : null;
+    case FormFieldType.PASSWORD:
+
     default:
       return null;
   }

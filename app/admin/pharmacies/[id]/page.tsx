@@ -4,7 +4,11 @@ import { Pharmacie } from "@/types/types";
 import { pharmacies } from "@/app/api/pharmacies/pharmacies";
 import { TileLayer, Marker, Popup, MapContainer } from "react-leaflet";
 
-const PharmaciePage = ({ params }) => {
+interface Params {
+  id: string;
+}
+
+const PharmaciePage = ({ params }: { params: Params }) => {
   const { id } = params;
 
   const pharmacie = pharmacies.find((ph: Pharmacie) => ph.id === parseInt(id));

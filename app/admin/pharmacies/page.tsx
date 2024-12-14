@@ -3,6 +3,7 @@ import { getAllPharmacies } from "@/app/api/pharmacies/pharmacies";
 import Image from "next/image";
 import Link from "next/link";
 import { pharmaciesColumns } from "./pharmaciesColumns";
+import { Button } from "@/components/ui/button";
 const AdminPharmacies = async () => {
   const pharmacies = await getAllPharmacies();
   return (
@@ -24,8 +25,11 @@ const AdminPharmacies = async () => {
       <main className="admin-main">
         <section className="w-full space-y-4">
           <h1 className="header">Gestion de pharmacies</h1>
+          <Button variant="outline" className="shad-primary-btn" asChild>
+            <Link href={"/admin/pharmacies/add"}>Ajouter Pharmacie</Link>
+          </Button>
+          <DataTable columns={pharmaciesColumns} data={pharmacies} />
         </section>
-        <DataTable columns={pharmaciesColumns} data={pharmacies} />
       </main>
     </div>
   );

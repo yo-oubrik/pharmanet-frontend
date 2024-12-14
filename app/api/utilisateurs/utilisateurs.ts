@@ -30,3 +30,6 @@ export const utilisateurs: Utilisateur[] = [
     motDePasse: "utilisateur3",
   },
 ];
+export const getCurrentUser = async () => {
+  return utilisateurs[0];
+};

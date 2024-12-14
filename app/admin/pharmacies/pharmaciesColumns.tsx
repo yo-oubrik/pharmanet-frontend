@@ -1,16 +1,15 @@
 "use client";
 
+import { deletePharmacie } from "@/app/api/pharmacies/pharmacies";
 import { Pharmacie, PharmacieStatus } from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { useRouter } from "next/navigation";
 import {
   FaCheckCircle,
-  FaTimesCircle,
   FaEdit,
-  FaEye,
-  FaTrash,
-  FaMap,
   FaLocationArrow,
+  FaTimesCircle,
+  FaTrash,
 } from "react-icons/fa";
 
 export const pharmaciesColumns: ColumnDef<Pharmacie>[] = [
@@ -42,20 +41,6 @@ export const pharmaciesColumns: ColumnDef<Pharmacie>[] = [
     },
   },
   {
-    accessorKey: "latitude",
-    header: "Latitude",
-    cell: ({ row }) => (
-      <p className="text-14-regular">{row.original.latitude.toFixed(4)}</p>
-    ),
-  },
-  {
-    accessorKey: "longitude",
-    header: "Longitude",
-    cell: ({ row }) => (
-      <p className="text-14-regular">{row.original.longitude.toFixed(4)}</p>
-    ),
-  },
-  {
     header: "Actions",
     cell: ({ row }) => {
       const router = useRouter();
@@ -70,7 +55,13 @@ export const pharmaciesColumns: ColumnDef<Pharmacie>[] = [
               router.push(`/admin/pharmacies/${id}`);
             }}
           />
-          <FaTrash className="text-red-500 cursor-pointer" title="Supprimer" />
+          <FaTrash
+            className="text-red-500 cursor-pointer"
+            title="Supprimer"
+            onClick={async () => {
+              await deletePharmacie(id);
+            }}
+          />
         </div>
       );
     },
