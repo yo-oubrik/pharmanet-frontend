@@ -9,6 +9,7 @@ export type Pharmacie = {
   status: PharmacieStatus;
   latitude: number;
   longitude: number;
+  responsable: string;
 };
 export type Utilisateur = {
   id?: number;

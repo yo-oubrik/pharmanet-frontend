@@ -3,8 +3,15 @@ import Link from "next/link";
 
 import { StatCard } from "@/components/StatCard";
 import { Button } from "@/components/ui/button";
+import {
+  getPatientCount,
+  getPharmacistCount,
+  getUsersCount,
+} from "../api/utilisateurs/utilisateurs";
 
 const AdminPage = async () => {
+  const patientsCount = await getPatientCount();
+  const pharmacistsCount = await getPharmacistCount();
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
       <header className="admin-header">
@@ -29,19 +36,19 @@ const AdminPage = async () => {
         <section className="admin-stat">
           <StatCard
             type="utilisateurs"
-            count={0}
+            count={patientsCount}
             label="Total patients"
             icon={"/assets/icons/patient.png"}
           />
           <StatCard
             type="utilisateurs"
-            count={0}
+            count={pharmacistsCount}
             label="Total pharmaciens"
             icon={"/assets/icons/pharmacist.png"}
           />
           <StatCard
             type="pharmacies"
-            count={0}
+            count={pharmacistsCount}
             label="Total pharmacies"
             icon={"/assets/icons/pharmacy.png"}
           />

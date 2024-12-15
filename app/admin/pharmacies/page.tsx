@@ -1,9 +1,9 @@
-import { DataTable } from "@/components/table/DataTable";
 import { getAllPharmacies } from "@/app/api/pharmacies/pharmacies";
 import Image from "next/image";
 import Link from "next/link";
 import { pharmaciesColumns } from "./pharmaciesColumns";
 import { Button } from "@/components/ui/button";
+import { DataTable } from "./DataTable";
 const AdminPharmacies = async () => {
   const pharmacies = await getAllPharmacies();
   return (

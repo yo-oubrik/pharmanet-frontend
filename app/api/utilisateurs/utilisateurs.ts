@@ -33,3 +33,21 @@ export const utilisateurs: Utilisateur[] = [
 export const getCurrentUser = async () => {
   return utilisateurs[0];
 };
+export const getUsersCount = async () => {
+  return utilisateurs.length;
+};
+export const getPatientCount = async () => {
+  return utilisateurs.filter(
+    (utilisateur) => utilisateur.role === RoleUtilisateur.Patient
+  ).length;
+};
+export const getPharmacistCount = async () => {
+  return utilisateurs.filter(
+    (utilisateur) => utilisateur.role === RoleUtilisateur.Pharmacist
+  ).length;
+};
+export const createUser = async (utilisateur: Utilisateur) => {
+  if (!((await getCurrentUser()).role === RoleUtilisateur.Admin)) return;
+  utilisateurs.push(utilisateur);
+  return utilisateur;
+};

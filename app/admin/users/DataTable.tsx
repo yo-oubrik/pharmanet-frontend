@@ -26,6 +26,14 @@ import {
 } from "@/components/ui/table";
 import { decryptKey } from "@/lib/utils";
 import React from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { FilteringInput } from "@/components/Inputs/FilteringInput";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -36,6 +44,8 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [filterValue, setFilterValue] = React.useState<string>("");
+  const [filterColumn, setFilterColumn] = React.useState<string>("");
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -67,9 +77,42 @@ export function DataTable<TData, TValue>({
       columnFilters,
     },
   });
+  const handleFilterChange = () => {
+    if (!filterValue || !filterColumn) {
+      table.setColumnFilters([]);
+    } else {
+      table.getColumn(filterColumn)?.setFilterValue(filterValue);
+    }
+  };
+
+  React.useEffect(() => {
+    handleFilterChange();
+  }, [filterValue, filterColumn]);
 
   return (
     <>
+      <div className="flex items-center space-x-4 mb-4">
+        <Select onValueChange={setFilterColumn}>
+          <SelectTrigger className="w-48">
+            <SelectValue placeholder="Select Column" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="nom">Nom</SelectItem>
+            <SelectItem value="prenom">Prenom</SelectItem>
+            <SelectItem value="email">Email</SelectItem>
+            <SelectItem value="role">Role</SelectItem>
+          </SelectContent>
+        </Select>
+
+        <FilteringInput
+          placeholder="Enter filter value"
+          value={filterValue}
+          onChange={(e) => {
+            setFilterValue(e.target.value);
+          }}
+        />
+      </div>
+
       <div className="data-table">
         <Table className="shad-table">
           <TableHeader className="bg-dark-200 w-full">

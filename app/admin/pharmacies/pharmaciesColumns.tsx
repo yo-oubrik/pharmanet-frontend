@@ -1,8 +1,10 @@
 "use client";
 
 import { deletePharmacie } from "@/app/api/pharmacies/pharmacies";
+import { Button } from "@/components/ui/button";
 import { Pharmacie, PharmacieStatus } from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
   FaCheckCircle,
@@ -15,13 +17,53 @@ import {
 export const pharmaciesColumns: ColumnDef<Pharmacie>[] = [
   {
     accessorKey: "nom",
-    header: "Nom",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          className="w-full justify-start mr-8"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Nom
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => <p className="text-14-medium">{row.original.nom}</p>,
   },
   {
     accessorKey: "adresse",
-    header: "Adresse",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          className="w-full justify-start"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Adresse
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => <p className="text-14-medium">{row.original.adresse}</p>,
+  },
+  {
+    accessorKey: "responsable",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          className="w-full justify-start"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Responsable
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <p className="text-14-medium">{row.original.responsable}</p>
+    ),
   },
   {
     accessorKey: "status",

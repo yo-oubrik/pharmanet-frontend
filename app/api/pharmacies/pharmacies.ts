@@ -8,6 +8,7 @@ export const pharmacies: Pharmacie[] = [
     status: PharmacieStatus.Active,
     latitude: 30.401086523592667,
     longitude: -9.584605089287122,
+    responsable: "Mohamed Alami",
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ export const pharmacies: Pharmacie[] = [
     status: PharmacieStatus.Inactive,
     latitude: 30.40970119802564,
     longitude: -9.583816537162797,
+    responsable: "Ahmed El Kassimi",
   },
   {
     id: 3,
@@ -24,6 +26,7 @@ export const pharmacies: Pharmacie[] = [
     status: PharmacieStatus.Active,
     latitude: 30.40984924348444,
     longitude: -9.576778420807095,
+    responsable: "Hassan El Alami",
   },
 ];
 export const getAllPharmacies = async () => {
@@ -58,4 +61,7 @@ export const togglePharmacieStatus = async (id: number) => {
   pharmacie?.status === PharmacieStatus.Active
     ? await deactivatePharmacie(id)
     : await activatePharmacie(id);
+};
+export const getPharmaciesCount = async () => {
+  return pharmacies.length;
 };
