@@ -1,18 +1,13 @@
 "use client";
 
-import { deletePharmacie } from "@/app/api/pharmacies/pharmacies";
 import { Button } from "@/components/ui/button";
+import { DeletePharmacieDialog } from "@/components/ui/pharmacies/DeletePharmacieDialog";
+import { UpdatePharmacieDialog } from "@/components/ui/pharmacies/UpdatePharmacieDialog";
 import { Pharmacie, PharmacieStatus } from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { useRouter } from "next/navigation";
-import {
-  FaCheckCircle,
-  FaEdit,
-  FaLocationArrow,
-  FaTimesCircle,
-  FaTrash,
-} from "react-icons/fa";
+import { FaCheckCircle, FaLocationArrow, FaTimesCircle } from "react-icons/fa";
 
 export const pharmaciesColumns: ColumnDef<Pharmacie>[] = [
   {
@@ -89,19 +84,13 @@ export const pharmaciesColumns: ColumnDef<Pharmacie>[] = [
       const id = row.original.id;
       return (
         <div className="flex gap-7">
-          <FaEdit className="text-blue-500 cursor-pointer" title="Modifier" />
+          <UpdatePharmacieDialog pharmacie={row.original} />
+          <DeletePharmacieDialog id={row.original.id || 0} />
           <FaLocationArrow
             className="text-gray-500 cursor-pointer"
             title="Localiser"
             onClick={() => {
               router.push(`/admin/pharmacies/${id}`);
-            }}
-          />
-          <FaTrash
-            className="text-red-500 cursor-pointer"
-            title="Supprimer"
-            onClick={async () => {
-              await deletePharmacie(id);
             }}
           />
         </div>

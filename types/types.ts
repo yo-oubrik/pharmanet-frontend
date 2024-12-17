@@ -1,9 +1,10 @@
+import { Ordonnance } from "./types";
 export enum PharmacieStatus {
   Active = "Active",
   Inactive = "Inactive",
 }
 export type Pharmacie = {
-  id: number;
+  id?: number;
   nom: string;
   adresse: string;
   status: PharmacieStatus;
@@ -25,3 +26,18 @@ export enum RoleUtilisateur {
   Patient = "patient",
   Admin = "admin",
 }
+export type Ordonnance = {
+  id?: number;
+  dateEnvoi: Date;
+  imageUrl: string;
+  status: OrdonnanceStatus;
+};
+export enum OrdonnanceStatus {
+  Pending = "Pending",
+  Processing = "Processing",
+  Completed = "Completed",
+  Rejected = "Rejected",
+}
+export type OrdonnanceWithUser = Ordonnance & {
+  utilisateur: Utilisateur;
+};

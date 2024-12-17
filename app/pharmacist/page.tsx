@@ -4,10 +4,10 @@ import Link from "next/link";
 import { StatCard } from "@/components/StatCard";
 import { Button } from "@/components/ui/button";
 
-const AdminPage = async () => {
+const PharmacistPage = async () => {
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
-      <header className="admin-header">
+      <header className="pharmacist-header">
         <Link href="/" className="cursor-pointer">
           <div className="flex items-center space-x-2">
             <Image
@@ -21,12 +21,12 @@ const AdminPage = async () => {
         </Link>
       </header>
 
-      <main className="admin-main">
+      <main className="pharmacist-main">
         <section className="w-full space-y-4">
           <h1 className="header">Tableau de bord</h1>
         </section>
 
-        <section className="admin-stat">
+        <section className="pharmacist-stat">
           <StatCard
             type="utilisateurs"
             count={0}
@@ -40,7 +40,7 @@ const AdminPage = async () => {
             icon={"/assets/icons/pharmacist.png"}
           />
         </section>
-        <section className="admin-buttons flex gap-4">
+        <section className="pharmacist-buttons flex gap-4">
           <Button
             variant="outline"
             className="shad-primary-btn hover:opacity-85 transition"
@@ -54,4 +54,4 @@ const AdminPage = async () => {
   );
 };
 
-export default AdminPage;
+export default PharmacistPage;

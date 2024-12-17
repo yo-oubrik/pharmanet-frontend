@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import Link from "next/link";
 
 import { StatCard } from "@/components/StatCard";
@@ -6,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import {
   getPatientCount,
   getPharmacistCount,
-  getUsersCount,
 } from "../api/utilisateurs/utilisateurs";
 
 const AdminPage = async () => {

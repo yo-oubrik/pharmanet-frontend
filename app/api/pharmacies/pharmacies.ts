@@ -65,3 +65,6 @@ export const togglePharmacieStatus = async (id: number) => {
 export const getPharmaciesCount = async () => {
   return pharmacies.length;
 };
+export const addNewPharmacie = async (pharmacie: Pharmacie) => {
+  pharmacies.push(pharmacie);
+};

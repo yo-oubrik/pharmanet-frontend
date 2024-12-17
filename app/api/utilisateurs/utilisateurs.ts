@@ -31,7 +31,7 @@ export const utilisateurs: Utilisateur[] = [
   },
 ];
 export const getCurrentUser = async () => {
-  return utilisateurs[0];
+  return utilisateurs[2];
 };
 export const getUsersCount = async () => {
   return utilisateurs.length;
@@ -46,8 +46,25 @@ export const getPharmacistCount = async () => {
     (utilisateur) => utilisateur.role === RoleUtilisateur.Pharmacist
   ).length;
 };
-export const createUser = async (utilisateur: Utilisateur) => {
+export const addNewUser = async (utilisateur: Utilisateur) => {
   if (!((await getCurrentUser()).role === RoleUtilisateur.Admin)) return;
   utilisateurs.push(utilisateur);
   return utilisateur;
+};
+export const updateUser = async (utilisateur: Utilisateur) => {
+  if (!((await getCurrentUser()).role === RoleUtilisateur.Admin)) return;
+  const index = utilisateurs.findIndex(
+    (user) => user.email === utilisateur.email
+  );
+  if (index === -1) return;
+  utilisateurs[index] = utilisateur;
+  return utilisateur;
+};
+export const getAllUsers = async () => utilisateurs;
+export const deleteUser = async (id: number) => {
+  if (!((await getCurrentUser()).role === RoleUtilisateur.Admin)) return;
+  const index = utilisateurs.findIndex((user) => user.id === id);
+  if (index === -1) return;
+  utilisateurs.splice(index, 1);
+  return id;
 };

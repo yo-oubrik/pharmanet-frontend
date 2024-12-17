@@ -5,7 +5,7 @@ import { getCurrentUser } from "../api/utilisateurs/utilisateurs";
 
 const Layout = async ({ children }) => {
   const currentUser = await getCurrentUser();
-  if (currentUser.role !== RoleUtilisateur.Admin) {
+  if (currentUser.role !== RoleUtilisateur.Pharmacist) {
     redirect("/401");
   }
 

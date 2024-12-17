@@ -1,7 +1,7 @@
-import { RoleUtilisateur } from "@/types/types";
+import { PharmacieStatus, RoleUtilisateur } from "@/types/types";
 import { z } from "zod";
 
-export const AddUserFormSchema = z.object({
+export const AddUpdateUserFormSchema = z.object({
   nom: z.string().min(2, {
     message: "Le nom doit contenir au moins 2 caractères",
   }),
@@ -16,6 +16,37 @@ export const AddUserFormSchema = z.object({
   }),
   role: z.nativeEnum(RoleUtilisateur, {
     message: "Veuillez sélectionner un rôle valide",
+  }),
+});
+export const AddUpdatePharmacieFormSchema = z.object({
+  nom: z.string().min(2, {
+    message: "Le nom doit contenir au moins 2 caractères",
+  }),
+  adresse: z.string().min(2, {
+    message: "L'adresse doit contenir au moins 2 caractères",
+  }),
+  status: z.nativeEnum(PharmacieStatus, {
+    message: "Veuillez sélectionner un statut valide",
+  }),
+  latitude: z
+    .string()
+    .transform((val) => parseFloat(val))
+    .refine((val) => val >= -90 && val <= 90, {
+      message: "Latitude must be between -90 and 90",
+    }),
+  longitude: z
+    .string()
+    .transform((val) => parseFloat(val))
+    .refine((val) => val >= -180 && val <= 180, {
+      message: "Longitude must be between -180 and 180",
+    }),
+  responsable: z.string().min(2, {
+    message: "Le nom du responsable doit contenir au moins 2 caractères",
+  }),
+});
+export const DeleteUserFormSchema = z.object({
+  id: z.number().int({
+    message: "L'identifiant doit être un nombre entier",
   }),
 });
 export const UserFormValidation = z.object({

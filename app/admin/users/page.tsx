@@ -1,11 +1,11 @@
-import { utilisateurs } from "@/app/api/utilisateurs/utilisateurs";
+import { AddUserDialog } from "@/components/ui/users/AddUserDialog";
 import Image from "next/image";
 import Link from "next/link";
-import { userColumns } from "./usersColumns";
-import { Button } from "@/components/ui/button";
 import { DataTable } from "./DataTable";
-import { AddUserDialog } from "@/components/ui/users/AddUserDialog";
+import { userColumns } from "./usersColumns";
+import { getAllUsers } from "@/app/api/utilisateurs/utilisateurs";
 const AdminPharmacies = async () => {
+  const users = await getAllUsers();
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
       <header className="admin-header">
@@ -26,7 +26,7 @@ const AdminPharmacies = async () => {
         <section className="w-full space-y-4">
           <h1 className="header">Gestion des utilisateurs</h1>
           <AddUserDialog />
-          <DataTable columns={userColumns} data={utilisateurs} />
+          <DataTable columns={userColumns} data={users} />
         </section>
       </main>
     </div>

@@ -1,28 +1,35 @@
+import { updateUser } from "@/app/api/utilisateurs/utilisateurs";
 import CustomFormField, { FormFieldType } from "@/components/CustomFormField";
 import { useToast } from "@/components/hooks/use-toast";
 import SubmitButton from "@/components/SubmitButton";
-import { Form, FormControl } from "@/components/ui/form";
 import { AddUpdateUserFormSchema } from "@/lib/validation";
-import { RoleUtilisateur } from "@/types/types";
+import { RoleUtilisateur, Utilisateur } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Label } from "@radix-ui/react-label";
+import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Label } from "../label";
-import { RadioGroup, RadioGroupItem } from "../radio-group";
-import { addNewUser } from "@/app/api/utilisateurs/utilisateurs";
+import { Form, FormControl } from "../form";
+import { useForm } from "react-hook-form";
 
-export const AddUserForm = () => {
+interface IUpdateUserFormProps {
+  utilisateur: Utilisateur;
+}
+
+export const UpdateUserForm: React.FC<IUpdateUserFormProps> = ({
+  utilisateur,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+
   const form = useForm<z.infer<typeof AddUpdateUserFormSchema>>({
     resolver: zodResolver(AddUpdateUserFormSchema),
     defaultValues: {
-      nom: "",
-      prenom: "",
-      email: "",
-      motDePasse: "",
-      role: RoleUtilisateur.Patient,
+      nom: utilisateur.nom,
+      prenom: utilisateur.prenom,
+      email: utilisateur.email,
+      motDePasse: utilisateur.motDePasse,
+      role: utilisateur.role,
     },
   });
 
@@ -43,16 +50,16 @@ export const AddUserForm = () => {
     };
 
     try {
-      await addNewUser(userData);
+      await updateUser(userData);
       toast({
-        title: "Utilisateur ajouté avec succès",
-        description: `${nom} ${prenom} a été ajouté comme ${role}.`,
+        title: "Mise à jour réussie",
+        description: `Les informations de ${prenom} ${nom} ont été mises à jour avec succès.`,
       });
       form.reset();
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Erreur lors de l'ajout",
+        title: "Erreur lors de la mise à jour",
         description: "Une erreur s'est produite. Veuillez réessayer.",
       });
       console.error(error);
@@ -104,7 +111,7 @@ export const AddUserForm = () => {
               <RadioGroup
                 className="flex h-11 gap-6 xl:justify-between"
                 onValueChange={field.onChange}
-                defaultValue={field.value}
+                value={field.value}
               >
                 {Object.values(RoleUtilisateur).map((option) => (
                   <div key={option} className="radio-group" id={option}>
@@ -118,7 +125,7 @@ export const AddUserForm = () => {
             </FormControl>
           )}
         ></CustomFormField>
-        <SubmitButton isLoading={isLoading}>Ajouter</SubmitButton>
+        <SubmitButton isLoading={isLoading}>Modifier</SubmitButton>
       </form>
     </Form>
   );
