@@ -30,25 +30,29 @@ export const AddUpdatePharmacieFormSchema = z.object({
   }),
   latitude: z
     .string()
-    .transform((val) => parseFloat(val))
-    .refine((val) => val >= -90 && val <= 90, {
-      message: "Latitude must be between -90 and 90",
-    }),
+    .refine(
+      (v) =>
+        !isNaN(parseFloat(v)) && parseFloat(v) >= -90 && parseFloat(v) <= 90,
+      {
+        message: "La latitude doit être comprise entre -90 et 90",
+      }
+    ),
+
   longitude: z
     .string()
-    .transform((val) => parseFloat(val))
-    .refine((val) => val >= -180 && val <= 180, {
-      message: "Longitude must be between -180 and 180",
-    }),
+    .refine(
+      (v) =>
+        !isNaN(parseFloat(v)) && parseFloat(v) >= -180 && parseFloat(v) <= 180,
+      {
+        message: "La longitude doit être comprise entre -180 et 180",
+      }
+    ),
+
   responsable: z.string().min(2, {
     message: "Le nom du responsable doit contenir au moins 2 caractères",
   }),
 });
-export const DeleteUserFormSchema = z.object({
-  id: z.number().int({
-    message: "L'identifiant doit être un nombre entier",
-  }),
-});
+
 export const UserFormValidation = z.object({
   name: z
     .string()

@@ -1,4 +1,3 @@
-import { Ordonnance } from "./types";
 export enum PharmacieStatus {
   Active = "Active",
   Inactive = "Inactive",
@@ -41,3 +40,9 @@ export enum OrdonnanceStatus {
 export type OrdonnanceWithUser = Ordonnance & {
   utilisateur: Utilisateur;
 };
+export class PharmacieError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "PharmacieError";
+  }
+}

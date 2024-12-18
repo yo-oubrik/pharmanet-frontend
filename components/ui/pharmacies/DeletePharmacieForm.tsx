@@ -1,33 +1,31 @@
-import { deletePharmacie } from "@/app/api/pharmacies/pharmacies";
 import { useToast } from "@/components/hooks/use-toast";
 import SubmitButton from "@/components/SubmitButton";
-import {
-  AddUpdateUserFormSchema,
-  DeleteUserFormSchema,
-} from "@/lib/validation";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { Form } from "../form";
 
 interface IDeleteUserFormProps {
-  id: number;
+  id?: number;
 }
 
 export const DeletePharmacieForm: React.FC<IDeleteUserFormProps> = ({ id }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-  const form = useForm<z.infer<typeof DeleteUserFormSchema>>({
-    resolver: zodResolver(AddUpdateUserFormSchema),
-    defaultValues: {
-      id: undefined,
-    },
-  });
-  async function onSubmit({ id }: z.infer<typeof DeleteUserFormSchema>) {
+  const form = useForm();
+  async function onSubmit() {
     setIsLoading(true);
     try {
-      await deletePharmacie(id);
+      const response = await fetch("/api/pharmacies", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Suppression échouée");
+      }
       toast({
         title: "Pharmacie supprimé avec succès",
       });

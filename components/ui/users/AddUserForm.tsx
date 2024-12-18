@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Label } from "../label";
 import { RadioGroup, RadioGroupItem } from "../radio-group";
-import { addNewUser } from "@/app/api/utilisateurs/utilisateurs";
 
 export const AddUserForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -43,7 +42,18 @@ export const AddUserForm = () => {
     };
 
     try {
-      await addNewUser(userData);
+      const response = await fetch("/api/utilisateurs", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add user");
+      }
+
       toast({
         title: "Utilisateur ajouté avec succès",
         description: `${nom} ${prenom} a été ajouté comme ${role}.`,

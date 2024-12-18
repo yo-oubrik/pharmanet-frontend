@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { DataTable } from "./DataTable";
 import { userColumns } from "./usersColumns";
-import { getAllUsers } from "@/app/api/utilisateurs/utilisateurs";
+import { getAllUsers } from "@/app/repo/utilisateurs";
 const AdminPharmacies = async () => {
   const users = await getAllUsers();
   return (

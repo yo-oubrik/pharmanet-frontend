@@ -1,12 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { UserRoleIcon } from "@/components/ui/users/UserRoleIcon";
+import { DeleteUserDialog } from "@/components/ui/users/DeleteUserDialog";
 import { UpdateUserDialog } from "@/components/ui/users/UpdateUserDialog";
+import { UserRoleIcon } from "@/components/ui/users/UserRoleIcon";
 import { Utilisateur } from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
-import { DeleteUserDialog } from "@/components/ui/users/DeleteUserDialog";
 
 export const userColumns: ColumnDef<Utilisateur>[] = [
   {
@@ -77,7 +77,7 @@ export const userColumns: ColumnDef<Utilisateur>[] = [
       return (
         <div className="flex gap-5 justify-center">
           <UpdateUserDialog utilisateur={row.original} />
-          <DeleteUserDialog id={row.original.id || 0} />
+          <DeleteUserDialog id={row.original.id} />
         </div>
       );
     },

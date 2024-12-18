@@ -1,13 +1,12 @@
 import Image from "next/image";
 
 type StatCardProps = {
-  type: "utilisateurs" | "pharmacies";
   count: number;
   label: string;
   icon: string;
 };
 
-export const StatCard = ({ count = 0, label, icon, type }: StatCardProps) => {
+export const StatCard = ({ count = 0, label, icon }: StatCardProps) => {
   return (
     <div className={"stat-card bg-_yellow"}>
       <div className="flex items-center gap-4">

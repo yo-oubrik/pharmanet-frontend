@@ -1,11 +1,11 @@
-import { getAllPharmacies } from "@/app/api/pharmacies/pharmacies";
+import { getPharmacies } from "@/app/repo/pharmacies";
 import { AddPharmacyDialog } from "@/components/ui/pharmacies/AddPharmacyDialog";
 import Image from "next/image";
 import Link from "next/link";
 import { DataTable } from "./DataTable";
 import { pharmaciesColumns } from "./pharmaciesColumns";
 const AdminPharmacies = async () => {
-  const pharmacies = await getAllPharmacies();
+  const pharmacies = await getPharmacies();
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
       <header className="admin-header">

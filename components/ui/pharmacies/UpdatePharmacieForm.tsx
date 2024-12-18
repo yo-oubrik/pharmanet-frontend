@@ -1,22 +1,15 @@
-import {
-  addNewPharmacie,
-  updatePharmacie,
-} from "@/app/api/pharmacies/pharmacies";
 import CustomFormField, { FormFieldType } from "@/components/CustomFormField";
 import { useToast } from "@/components/hooks/use-toast";
 import SubmitButton from "@/components/SubmitButton";
-import {
-  AddUpdatePharmacieFormSchema,
-  AddUpdateUserFormSchema,
-} from "@/lib/validation";
+import { AddUpdatePharmacieFormSchema } from "@/lib/validation";
 import { Pharmacie, PharmacieStatus } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "@radix-ui/react-label";
-import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form, FormControl } from "../form";
+import { RadioGroup, RadioGroupItem } from "../radio-group";
 export interface UpdatePharmacieFormProps {
   pharmacie: Pharmacie;
 }
@@ -26,11 +19,11 @@ export const UpdatePharmacieForm: React.FC<UpdatePharmacieFormProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const form = useForm<z.infer<typeof AddUpdatePharmacieFormSchema>>({
-    resolver: zodResolver(AddUpdateUserFormSchema),
+    resolver: zodResolver(AddUpdatePharmacieFormSchema),
     defaultValues: {
       adresse: pharmacie.adresse,
-      latitude: pharmacie.latitude,
-      longitude: pharmacie.longitude,
+      latitude: pharmacie.latitude.toString(),
+      longitude: pharmacie.longitude.toString(),
       nom: pharmacie.nom,
       responsable: pharmacie.responsable,
       status: pharmacie.status,
@@ -56,7 +49,21 @@ export const UpdatePharmacieForm: React.FC<UpdatePharmacieFormProps> = ({
     };
 
     try {
-      await updatePharmacie(pharmacieData);
+      const response = await fetch("/api/pharmacies", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...pharmacieData,
+          latitude: parseFloat(latitude),
+          longitude: parseFloat(longitude),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Mise à jour échouée");
+      }
       toast({
         title: "Mise à jour réussie",
         description: `Les informations de la pharmacie ${nom} ont été mises à jour.`,

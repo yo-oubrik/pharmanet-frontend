@@ -10,7 +10,7 @@ import { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { DeletePharmacieForm } from "./DeletePharmacieForm";
 interface IUsersDialogProps {
-  id: number;
+  id?: number;
 }
 export const DeletePharmacieDialog: React.FC<IUsersDialogProps> = ({ id }) => {
   const [open, setOpen] = useState(false);

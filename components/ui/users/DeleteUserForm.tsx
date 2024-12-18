@@ -1,34 +1,31 @@
-import { deleteUser } from "@/app/api/utilisateurs/utilisateurs";
 import { useToast } from "@/components/hooks/use-toast";
 import SubmitButton from "@/components/SubmitButton";
-import {
-  AddUpdateUserFormSchema,
-  DeleteUserFormSchema,
-} from "@/lib/validation";
 import { useState } from "react";
-import { z } from "zod";
-import { Form } from "../form";
-import { format } from "path";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { Form } from "../form";
 
 interface IDeleteUserFormProps {
-  id: number;
+  id?: number;
 }
 
 export const DeleteUserForm: React.FC<IDeleteUserFormProps> = ({ id }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-  const form = useForm<z.infer<typeof DeleteUserFormSchema>>({
-    resolver: zodResolver(AddUpdateUserFormSchema),
-    defaultValues: {
-      id: undefined,
-    },
-  });
-  async function onSubmit({ id }: z.infer<typeof DeleteUserFormSchema>) {
-    setIsLoading(true);
+  const form = useForm();
+  async function onSubmit() {
     try {
-      await deleteUser(id);
+      setIsLoading(true);
+      const response = await fetch("/api/utilisateurs", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete user");
+      }
       toast({
         title: "Utilisateur supprimé avec succès",
       });

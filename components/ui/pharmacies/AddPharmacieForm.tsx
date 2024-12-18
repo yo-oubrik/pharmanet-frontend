@@ -1,4 +1,3 @@
-import { addNewPharmacie } from "@/app/api/pharmacies/pharmacies";
 import CustomFormField, { FormFieldType } from "@/components/CustomFormField";
 import { useToast } from "@/components/hooks/use-toast";
 import SubmitButton from "@/components/SubmitButton";
@@ -6,11 +5,11 @@ import { AddUpdatePharmacieFormSchema } from "@/lib/validation";
 import { PharmacieStatus } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "@radix-ui/react-label";
-import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form, FormControl } from "../form";
+import { RadioGroup, RadioGroupItem } from "../radio-group";
 
 export const AddPharmacieForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,9 +18,9 @@ export const AddPharmacieForm = () => {
     resolver: zodResolver(AddUpdatePharmacieFormSchema),
     defaultValues: {
       adresse: "",
-      latitude: undefined,
-      longitude: undefined,
       nom: "",
+      latitude: "",
+      longitude: "",
       responsable: "",
       status: PharmacieStatus.Active,
     },
@@ -46,7 +45,21 @@ export const AddPharmacieForm = () => {
     };
 
     try {
-      await addNewPharmacie(pharmacieData);
+      const response = await fetch("/api/pharmacies", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...pharmacieData,
+          latitude: parseFloat(latitude),
+          longitude: parseFloat(longitude),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add pharmacy");
+      }
       toast({
         title: "Pharmacie ajoutée avec succès",
         description: `${nom} a été ajouté avec succès.`,
@@ -129,6 +142,7 @@ export const AddPharmacieForm = () => {
             </FormControl>
           )}
         />
+
         <SubmitButton isLoading={isLoading}>Ajouter</SubmitButton>
       </form>
     </Form>

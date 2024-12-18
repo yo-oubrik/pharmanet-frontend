@@ -50,7 +50,17 @@ export const UpdateUserForm: React.FC<IUpdateUserFormProps> = ({
     };
 
     try {
-      await updateUser(userData);
+      const response = await fetch("/api/utilisateurs", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to modfiy user informations");
+      }
       toast({
         title: "Mise à jour réussie",
         description: `Les informations de ${prenom} ${nom} ont été mises à jour avec succès.`,

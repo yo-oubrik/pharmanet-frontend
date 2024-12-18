@@ -28,7 +28,7 @@ export const UpdatePharmacieDialog: React.FC<UpdatePharmacieDialogProps> = ({
           />
         </DialogTrigger>
         <DialogContent className="shad-dialog sm:max-w-md">
-          <DialogHeader className="mb-4 space-y-3">
+          <DialogHeader className="mb-0 space-y-3">
             <DialogTitle>
               Mettre à jour les informations de la pharmacie
             </DialogTitle>

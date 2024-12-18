@@ -85,7 +85,7 @@ export const pharmaciesColumns: ColumnDef<Pharmacie>[] = [
       return (
         <div className="flex gap-7">
           <UpdatePharmacieDialog pharmacie={row.original} />
-          <DeletePharmacieDialog id={row.original.id || 0} />
+          <DeletePharmacieDialog id={row.original.id} />
           <FaLocationArrow
             className="text-gray-500 cursor-pointer"
             title="Localiser"
