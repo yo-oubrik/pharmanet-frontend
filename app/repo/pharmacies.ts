@@ -63,3 +63,7 @@ export async function getPharmacieById(pharmacieId: number) {
     (pharmacie: Pharmacie) => pharmacie.id === pharmacieId
   );
 }
+export async function getPharmaciesCount() {
+  const pharmacies = await readData();
+  return pharmacies.length;
+}

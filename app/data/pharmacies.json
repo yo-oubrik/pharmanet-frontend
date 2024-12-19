@@ -1,29 +1,11 @@
 [
   {
-    "id": 2,
-    "nom": "Pharmacie Haut Founty",
-    "adresse": "Lot 335, Agadir",
-    "status": "Inactive",
-    "latitude": 30.40970119802564,
-    "longitude": -9.583816537162797,
-    "responsable": "Ahmed El Kassimi"
-  },
-  {
     "id": 3,
-    "nom": "Pharmacie itry",
     "adresse": "Agadir 80000",
-    "status": "Active",
     "latitude": 30.40984924348444,
     "longitude": -9.576778420807095,
-    "responsable": "Hassan El Alami"
-  },
-  {
-    "id": 4,
-    "adresse": "Al houda",
-    "latitude": 30.398537491286756,
-    "longitude": -9.53380130277953,
-    "nom": "Pharmacy",
-    "responsable": "Ahmed",
+    "nom": "Pharmacie itry",
+    "responsable": "Hassan El Alami",
     "status": "Active"
   }
 ]

@@ -31,7 +31,7 @@ export const utilisateurs: Utilisateur[] = [
   },
 ];
 export const getCurrentUser = async () => {
-  return utilisateurs[0];
+  return utilisateurs[2];
 };
 export const getUsersCount = async () => {
   return utilisateurs.length;

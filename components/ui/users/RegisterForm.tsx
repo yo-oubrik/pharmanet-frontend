@@ -1,34 +1,26 @@
 import CustomFormField, { FormFieldType } from "@/components/CustomFormField";
 import { useToast } from "@/components/hooks/use-toast";
 import SubmitButton from "@/components/SubmitButton";
+import { Form, FormControl } from "@/components/ui/form";
 import { AddUpdateUserFormSchema } from "@/lib/validation";
-import { RoleUtilisateur, Utilisateur } from "@/types/types";
+import { RoleUtilisateur } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Label } from "@radix-ui/react-label";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Form, FormControl } from "../form";
+import { Label } from "../label";
 import { RadioGroup, RadioGroupItem } from "../radio-group";
 
-interface IUpdateUserFormProps {
-  utilisateur: Utilisateur;
-}
-
-export const UpdateUserForm: React.FC<IUpdateUserFormProps> = ({
-  utilisateur,
-}) => {
+export const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-
   const form = useForm<z.infer<typeof AddUpdateUserFormSchema>>({
     resolver: zodResolver(AddUpdateUserFormSchema),
     defaultValues: {
-      nom: utilisateur.nom,
-      prenom: utilisateur.prenom,
-      email: utilisateur.email,
-      motDePasse: utilisateur.motDePasse,
-      role: utilisateur.role,
+      nom: "",
+      prenom: "",
+      email: "",
+      motDePasse: "",
     },
   });
 
@@ -37,7 +29,6 @@ export const UpdateUserForm: React.FC<IUpdateUserFormProps> = ({
     prenom,
     email,
     motDePasse,
-    role,
   }: z.infer<typeof AddUpdateUserFormSchema>) {
     setIsLoading(true);
     const userData = {
@@ -45,30 +36,31 @@ export const UpdateUserForm: React.FC<IUpdateUserFormProps> = ({
       prenom,
       email,
       motDePasse,
-      role: role as RoleUtilisateur,
+      role: RoleUtilisateur.Patient,
     };
 
     try {
       const response = await fetch("/api/utilisateurs", {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...userData, id: utilisateur.id }),
+        body: JSON.stringify(userData),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to modfiy user informations");
+        throw new Error("Failed to add user");
       }
+
       toast({
-        title: "Mise à jour réussie",
-        description: `Les informations de ${prenom} ${nom} ont été mises à jour avec succès.`,
+        title: "Utilisateur ajouté avec succès",
+        description: `${nom} ${prenom} a été ajouté comme ${role}.`,
       });
       form.reset();
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Erreur lors de la mise à jour",
+        title: "Erreur lors de l'ajout",
         description: "Une erreur s'est produite. Veuillez réessayer.",
       });
       console.error(error);
@@ -120,7 +112,7 @@ export const UpdateUserForm: React.FC<IUpdateUserFormProps> = ({
               <RadioGroup
                 className="flex h-11 gap-6 xl:justify-between"
                 onValueChange={field.onChange}
-                value={field.value}
+                defaultValue={field.value}
               >
                 {Object.values(RoleUtilisateur).map((option) => (
                   <div key={option} className="radio-group" id={option}>
@@ -134,7 +126,7 @@ export const UpdateUserForm: React.FC<IUpdateUserFormProps> = ({
             </FormControl>
           )}
         ></CustomFormField>
-        <SubmitButton isLoading={isLoading}>Modifier</SubmitButton>
+        <SubmitButton isLoading={isLoading}>Ajouter</SubmitButton>
       </form>
     </Form>
   );

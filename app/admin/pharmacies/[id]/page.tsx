@@ -19,13 +19,11 @@ const PharmacyMarkerIcon = new Icon({
 const PharmaciePage = ({ params }: { params: Params }) => {
   const [pharmacy, setPharmacy] = useState<Pharmacie | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
     const fetchPharmacy = async () => {
       try {
-        setIsLoading(true);
         const response = await fetch(`/api/pharmacies/${params.id}`);
 
         if (!response.ok) {
@@ -48,21 +46,11 @@ const PharmaciePage = ({ params }: { params: Params }) => {
         setError(
           err instanceof Error ? err.message : "An unexpected error occurred"
         );
-      } finally {
-        setIsLoading(false);
       }
     };
 
     fetchPharmacy();
   }, [params.id, router]);
-
-  if (isLoading) {
-    return (
-      <div className="h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900" />
-      </div>
-    );
-  }
 
   if (error) {
     return (

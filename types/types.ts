@@ -29,6 +29,15 @@ export type Ordonnance = {
   id?: number;
   dateEnvoi: Date;
   imageUrl: string;
+  montant?: number;
+  status: OrdonnanceStatus;
+};
+export type OrdonnanceForTable = {
+  id?: number;
+  dateEnvoi: string;
+  heureEnvoi: string;
+  imageUrl: string;
+  montant?: number;
   status: OrdonnanceStatus;
 };
 export enum OrdonnanceStatus {
@@ -46,3 +55,7 @@ export class PharmacieError extends Error {
     this.name = "PharmacieError";
   }
 }
+export type Credentials = {
+  email: string;
+  motDePasse: string;
+};

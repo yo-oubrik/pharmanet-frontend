@@ -1,26 +1,18 @@
 [
   {
     "id": 1,
-    "nom": "fksdkj",
-    "prenom": "jfkqsdqjfk",
-    "email": "jfqskfjqskdf@dfqsjdkf.jfdsqjfk",
-    "motDePasse": "jkfqdsjkfmklfqs",
-    "role": "admin"
-  },
-  {
-    "id": 2,
-    "nom": "jsdkfsqj",
-    "prenom": "kfjsfjk",
-    "email": "jfasdkfjklqf@dsjfsqkf.dksjfkl",
-    "motDePasse": "jfqdsmfkqlmsf",
+    "nom": "youssef",
+    "prenom": "oubrik",
+    "email": "youssef@gmail.com",
+    "motDePasse": "jfsfjskk",
     "role": "patient"
   },
   {
-    "id": 3,
-    "nom": "madoox",
-    "prenom": "dsjfdqsklfj",
-    "email": "jdsfqsjfk@dsfljkkslq.lfjqds",
-    "motDePasse": "jfdqslkflj",
-    "role": "patient"
+    "id": 1,
+    "nom": "youssef",
+    "prenom": "oubrik",
+    "email": "youssef@gmail.com",
+    "motDePasse": "jfsfjskk",
+    "role": "pharmacist "
   }
 ]

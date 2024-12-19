@@ -8,7 +8,7 @@ import {
   getPendingOrdonnancesCount,
   getProcessingOrdonnancesCount,
   getRejectedOrdonnancesCount,
-} from "../api/oradonnances/ordannances";
+} from "../repo/ordonnances";
 
 const PharmacistPage = async () => {
   const pendingOrdersCount = await getPendingOrdonnancesCount();

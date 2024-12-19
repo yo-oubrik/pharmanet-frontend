@@ -40,6 +40,7 @@ export const UpdatePharmacieForm: React.FC<UpdatePharmacieFormProps> = ({
   }: z.infer<typeof AddUpdatePharmacieFormSchema>) {
     setIsLoading(true);
     const pharmacieData = {
+      id: pharmacie.id,
       adresse,
       latitude,
       longitude,

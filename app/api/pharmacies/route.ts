@@ -34,8 +34,8 @@ export async function PUT(request: Request) {
 }
 export async function DELETE(request: Request) {
   try {
-    const data = await request.json();
-    await deletePharmacie(data);
+    const { id } = await request.json();
+    await deletePharmacie(id);
     return NextResponse.json(
       { message: "Pharmacie supprimée" },
       { status: 200 }

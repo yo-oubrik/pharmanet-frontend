@@ -1,33 +1,28 @@
-import { PatientForm } from "@/components/forms/PatientForm";
-import { PasskeyModal } from "@/components/PasskeyModal";
+"use client";
+import { AddUserForm } from "@/components/ui/users/AddUserForm";
+import { LoginForm } from "@/components/ui/users/LoginForm";
 import "leaflet/dist/leaflet.css";
 import Image from "next/image";
-import Link from "next/link";
-const Home = ({ searchParams }: SearchParamProps) => {
-  const isAdmin = searchParams?.admin === "true";
-
+const Home = () => {
   return (
     <div className="flex h-screen max-h-screen">
-      {isAdmin && <PasskeyModal />}
-
       <section className="remove-scrollbar container my-auto flex justify-between">
         <div className="sub-container max-w-[496px]">
-          <Image
-            src="/assets/icons/logo.png"
-            height={80}
-            width={80}
-            alt="patient"
-            className="mb-12"
-          />
-          <PatientForm />
+          <div className="flex gap-3 items-center justify-center mb-10">
+            <Image
+              src="/assets/icons/logo.png"
+              height={90}
+              width={90}
+              alt="patient"
+            />
+            <p className="font-bold text-xl">PharmaNet</p>
+          </div>
+          <LoginForm />
 
           <div className="text-14-regular mt-20 flex justify-between">
             <p className="justify-items-end text-dark-600 xl:text-left">
               © {new Date().getUTCFullYear().toString()} PharmaNet.
             </p>
-            <Link href="/?admin=true" className="text-green-500">
-              Admin
-            </Link>
           </div>
         </div>
       </section>

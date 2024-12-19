@@ -1,4 +1,8 @@
-import { PharmacieStatus, RoleUtilisateur } from "@/types/types";
+import {
+  OrdonnanceStatus,
+  PharmacieStatus,
+  RoleUtilisateur,
+} from "@/types/types";
 import { z } from "zod";
 
 export const AddUpdateUserFormSchema = z.object({
@@ -52,6 +56,22 @@ export const AddUpdatePharmacieFormSchema = z.object({
     message: "Le nom du responsable doit contenir au moins 2 caractères",
   }),
 });
+export const UpdateOrdonnanceFormSchema = z
+  .object({
+    status: z.nativeEnum(OrdonnanceStatus, {
+      message: "Veuillez sélectionner un statut valide",
+    }),
+    montant: z.string().optional(),
+  })
+  .refine(
+    (data) =>
+      data.status !== OrdonnanceStatus.Completed ||
+      (data.montant && data.montant.trim() !== ""),
+    {
+      path: ["montant"],
+      message: "Le montant est requis lorsque le statut est 'completed'.",
+    }
+  );
 
 export const UserFormValidation = z.object({
   name: z

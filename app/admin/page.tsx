@@ -1,10 +1,11 @@
-import { getPatientCount } from "../repo/utilisateurs";
+import { getPharmaciesCount } from "../repo/pharmacies";
+import { getPatientCount, getPharmacistCount } from "../repo/utilisateurs";
 import AdminPageClient from "./AdminPageClient";
 
 const AdminPage = async () => {
   const patientsCount = await getPatientCount();
-  const pharmacistsCount = 0;
-  const pharmaciesCount = 0;
+  const pharmacistsCount = await getPharmacistCount();
+  const pharmaciesCount = await getPharmaciesCount();
   return (
     <AdminPageClient
       patientsCount={patientsCount}

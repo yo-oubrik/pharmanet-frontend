@@ -1,11 +1,10 @@
-import { getAllOrdonnances } from "@/app/api/oradonnances/ordannances";
-import { AddUserDialog } from "@/components/ui/users/AddUserDialog";
+import { getOrdonnancesForTable } from "@/app/repo/ordonnances";
 import Image from "next/image";
 import Link from "next/link";
 import { DataTable } from "./DataTable";
 import { ordonnancesColumns } from "./ordonnancesColumns";
 const PharmacistOrdonnances = async () => {
-  const ordonnances = await getAllOrdonnances();
+  const ordonnances = await getOrdonnancesForTable();
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
       <header className="admin-header">

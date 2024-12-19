@@ -83,6 +83,7 @@ export function DataTable<TData, TValue>({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="dateEnvoi">Date d'envoi</SelectItem>
+            <SelectItem value="heureEnvoi">Heure d'envoi</SelectItem>
             <SelectItem value="status">Status</SelectItem>
           </SelectContent>
         </Select>

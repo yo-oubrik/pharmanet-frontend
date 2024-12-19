@@ -1,4 +1,4 @@
-import { RoleUtilisateur } from "@/types/types";
+import { Credentials, RoleUtilisateur } from "@/types/types";
 import { promises as fs } from "fs";
 import * as path from "path";
 
@@ -73,4 +73,18 @@ export async function getPatientCount() {
   return utilisateurs.filter(
     (user: any) => user.role === RoleUtilisateur.Patient
   ).length;
+}
+export async function getPharmacistCount() {
+  const utilisateurs = await readData();
+  return utilisateurs.filter(
+    (user: any) => user.role === RoleUtilisateur.Pharmacist
+  ).length;
+}
+export async function validCredentials(credentials: Credentials) {
+  const utilisateurs = await readData();
+  return utilisateurs.some(
+    (user: any) =>
+      user.email === credentials.email &&
+      user.motDePasse === credentials.motDePasse
+  );
 }
