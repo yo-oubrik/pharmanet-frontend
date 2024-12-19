@@ -1,18 +1,10 @@
 [
   {
     "id": 1,
-    "nom": "youssef",
+    "nom": "ahmed",
     "prenom": "oubrik",
     "email": "youssef@gmail.com",
-    "motDePasse": "jfsfjskk",
-    "role": "patient"
-  },
-  {
-    "id": 1,
-    "nom": "youssef",
-    "prenom": "oubrik",
-    "email": "youssef@gmail.com",
-    "motDePasse": "jfsfjskk",
-    "role": "pharmacist "
+    "motDePasse": "youssef123",
+    "role": "admin"
   }
 ]

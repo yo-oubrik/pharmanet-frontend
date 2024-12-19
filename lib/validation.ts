@@ -1,10 +1,18 @@
+import { LoginForm } from "@/components/ui/users/LoginForm";
 import {
   OrdonnanceStatus,
   PharmacieStatus,
   RoleUtilisateur,
 } from "@/types/types";
 import { z } from "zod";
-
+export const LoginFormSchema = z.object({
+  email: z.string().email({
+    message: "Adresse email invalide",
+  }),
+  motDePasse: z.string().min(8, {
+    message: "Le mot de passe doit contenir au moins 8 caractères",
+  }),
+});
 export const AddUpdateUserFormSchema = z.object({
   nom: z.string().min(2, {
     message: "Le nom doit contenir au moins 2 caractères",

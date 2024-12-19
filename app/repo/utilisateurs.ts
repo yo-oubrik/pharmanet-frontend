@@ -82,7 +82,7 @@ export async function getPharmacistCount() {
 }
 export async function validCredentials(credentials: Credentials) {
   const utilisateurs = await readData();
-  return utilisateurs.some(
+  return utilisateurs.find(
     (user: any) =>
       user.email === credentials.email &&
       user.motDePasse === credentials.motDePasse

@@ -1,20 +1,22 @@
+"use client";
 import Image from "next/image";
-import Link from "next/link";
-
 import { StatCard } from "@/components/StatCard";
 import { Button } from "@/components/ui/button";
-import {
-  getPendingOrdonnancesCount,
-  getProcessingOrdonnancesCount,
-  getCompletedOrdonnancesCount,
-  getRejectedOrdonnancesCount,
-} from "../repo/ordonnances";
-
-const PharmacistPage = async () => {
-  const pendingOrdersCount = await getPendingOrdonnancesCount();
-  const processingOrdersCount = await getProcessingOrdonnancesCount();
-  const completedOrdersCount = await getCompletedOrdonnancesCount();
-  const rejectedOrdersCount = await getRejectedOrdonnancesCount();
+import { Link } from "lucide-react";
+import { useRouter } from "next/navigation";
+interface PharmacistClientPageProps {
+  pendingOrdersCount: number;
+  processingOrdersCount: number;
+  completedOrdersCount: number;
+  rejectedOrdersCount: number;
+}
+export const PharmacistClientPage: React.FC<PharmacistClientPageProps> = ({
+  completedOrdersCount,
+  pendingOrdersCount,
+  processingOrdersCount,
+  rejectedOrdersCount,
+}) => {
+  const router = useRouter();
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
       <header className="manager-header">
@@ -30,7 +32,6 @@ const PharmacistPage = async () => {
           </div>
         </Link>
       </header>
-
       <main className="manager-main">
         <section className="w-full space-y-4">
           <h1 className="header">Tableau de bord</h1>
@@ -73,5 +74,3 @@ const PharmacistPage = async () => {
     </div>
   );
 };
-
-export default PharmacistPage;

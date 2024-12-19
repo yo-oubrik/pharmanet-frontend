@@ -17,7 +17,7 @@ const AdminPageClient: React.FC<AdminPageClientProps> = ({
 }) => {
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
-      <header className="manager-header">
+      <header className="manager-header justify-between">
         <Link href="/" className="cursor-pointer">
           <div className="flex items-center space-x-2">
             <Image

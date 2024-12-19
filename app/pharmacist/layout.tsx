@@ -1,12 +1,15 @@
 "use client";
 import { RoleUtilisateur } from "@/types/types";
-import { redirect } from "next/navigation";
-import { getCurrentUser } from "../api/utilisateurs/utilisateurs";
+import { useRouter } from "next/navigation";
 
-const Layout = async ({ children }) => {
-  const currentUser = await getCurrentUser();
-  if (currentUser.role !== RoleUtilisateur.Pharmacist) {
-    redirect("/401");
+const Layout = ({ children }) => {
+  const router = useRouter();
+  if (typeof window !== "undefined") {
+    const currentUser = JSON.parse(localStorage.getItem("user") || "null");
+
+    if (!currentUser || currentUser.role !== RoleUtilisateur.Pharmacist) {
+      router.push("/");
+    }
   }
 
   return <div>{children}</div>;
