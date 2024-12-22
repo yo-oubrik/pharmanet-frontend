@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { StatCard } from "@/components/StatCard";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 interface AdminPageClientProps {
   patientsCount: number;
   pharmacistsCount: number;
@@ -15,6 +16,7 @@ const AdminPageClient: React.FC<AdminPageClientProps> = ({
   pharmaciesCount,
   pharmacistsCount,
 }) => {
+  const router = useRouter();
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
       <header className="manager-header justify-between">
@@ -29,6 +31,14 @@ const AdminPageClient: React.FC<AdminPageClientProps> = ({
             <h2 className="font-bold">PharmaNet</h2>
           </div>
         </Link>
+        <Button
+          onClick={() => {
+            localStorage.removeItem("user");
+            router.push("/");
+          }}
+        >
+          déconnexion
+        </Button>
       </header>
 
       <main className="manager-main">

@@ -1,11 +1,29 @@
 [
   {
+    "id": 1,
+    "adresse": "P735+R5 Tiznit",
+    "latitude": 29.712917079645404,
+    "longitude": -9.743779782252018,
+    "nom": "Pharmacie de l'Hôpital",
+    "responsable": "Ahmed",
+    "status": "Active"
+  },
+  {
+    "id": 2,
+    "adresse": "M7Q5+7FH، Unnamed Road،, Tiznit",
+    "latitude": 29.700989067157643,
+    "longitude": -9.7389732637652,
+    "nom": "Pharmacie iligh",
+    "responsable": "Samir",
+    "status": "Inactive"
+  },
+  {
     "id": 3,
-    "adresse": "Agadir 80000",
-    "latitude": 30.40984924348444,
-    "longitude": -9.576778420807095,
-    "nom": "Pharmacie itry",
-    "responsable": "Hassan El Alami",
+    "adresse": "P735+MWG, Tiznit 85000",
+    "latitude": 29.717091549274322,
+    "longitude": -9.740346554761434,
+    "nom": "Pharmacie ABOUZAID",
+    "responsable": "Karim",
     "status": "Active"
   }
 ]

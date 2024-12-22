@@ -1,15 +1,23 @@
 "use client";
 import { RoleUtilisateur } from "@/types/types";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const Layout = ({ children }) => {
   const router = useRouter();
-  if (typeof window !== "undefined") {
-    const currentUser = JSON.parse(localStorage.getItem("user") || "null");
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
+  useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem("user") || "null");
     if (!currentUser || currentUser.role !== RoleUtilisateur.Pharmacist) {
       router.push("/");
+    } else {
+      setIsAuthorized(true);
     }
+  }, [router]);
+
+  if (!isAuthorized) {
+    return null; // or return a loading spinner if you prefer
   }
 
   return <div>{children}</div>;

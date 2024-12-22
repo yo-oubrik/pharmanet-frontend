@@ -3,7 +3,7 @@
     "id": 1,
     "dateEnvoi": "2024-09-01T00:10:00.000Z",
     "imageUrl": "/assets/images/ordonnance1.jpg",
-    "status": "Completed",
+    "status": "Processing",
     "montant": "555",
     "utilisateur": {
       "id": 1,

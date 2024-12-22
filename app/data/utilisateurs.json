@@ -1,10 +1,50 @@
 [
   {
     "id": 1,
-    "nom": "ahmed",
-    "prenom": "oubrik",
-    "email": "youssef@gmail.com",
-    "motDePasse": "youssef123",
+    "nom": "admin",
+    "prenom": "admin",
+    "email": "admin@admin.com",
+    "motDePasse": "admin123",
     "role": "admin"
+  },
+  {
+    "id": 2,
+    "nom": "samir",
+    "prenom": "salmi",
+    "email": "samir@gmail.com",
+    "motDePasse": "samir123",
+    "role": "pharmacist"
+  },
+  {
+    "id": 3,
+    "nom": "mohamed",
+    "prenom": "mahmoud",
+    "email": "mahmoud@gmail.com",
+    "motDePasse": "mohamed123",
+    "role": "pharmacist"
+  },
+  {
+    "id": 6,
+    "nom": "patient1",
+    "prenom": "patient1",
+    "email": "patient1@gmail.com",
+    "motDePasse": "mohamed123",
+    "role": "patient"
+  },
+  {
+    "id": 7,
+    "nom": "patient2",
+    "prenom": "patient2",
+    "email": "patient2@gmail.com",
+    "motDePasse": "youssef123",
+    "role": "patient"
+  },
+  {
+    "id": 8,
+    "nom": "patient3",
+    "prenom": "patient3",
+    "email": "patient3@gmail.com",
+    "motDePasse": "mohamed123",
+    "role": "patient"
   }
 ]
